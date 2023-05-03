@@ -20,7 +20,7 @@ class AuthLoginView(LoginView):
     # success_url = '/users/'
 
     def get_success_url(self):
-        return reverse('users:user_list')
+        return reverse('phone_list')
 
 
 class UserListView(ListView):
