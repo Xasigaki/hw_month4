@@ -25,11 +25,11 @@ class Phones(models.Model):
 
     @property
     def rating(self):
-        stars = [review.stars for review in self.reviews.all() if review.stars is not None]
-        if not stars:
-            return 0
+        reviews = self.reviews.all()
+        if reviews:
+            return round(sum([review.rate for review in reviews if review.rate is not None]) / len(reviews), 2)
         else:
-            return round(sum(stars) / len(stars), 2)
+            return 0
 
     class Meta:
         verbose_name = 'Телефон'
@@ -38,10 +38,10 @@ class Phones(models.Model):
 
 # для отзыва
 class Reviews(models.Model):
-    RATING = ((i, '*' * i) for i in range(1, 6))
+    stars = ((i, '*' * i) for i in range(1, 6))
     comment = models.CharField('Комментарий', max_length=500, null=True)
     choice_film = models.ForeignKey(Phones, on_delete=models.CASCADE, related_name='reviews', null=True)
-    rate = models.IntegerField('Оценка', choices=RATING, null=True)
+    rate = models.IntegerField('Оценка', choices=stars, null=True)
     created_date = models.DateField(auto_now_add=True, null=True)
 
     def __str__(self):

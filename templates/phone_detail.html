@@ -16,7 +16,8 @@
             <p class="card-text">{{object.cost}}</p>
             <p class="card-text">{{object.model_phone}}</p>
             <p class="card-text">{{object.created_date}}</p>
-            <a href="/" class="btn btn-primary">На главную</a>
+
+            <a href="/phone_list/" class="btn btn-primary">На главную</a>
         </div>
     </div>
 
@@ -37,6 +38,7 @@
                 <td>&nbsp;&nbsp;{{j.comment}}</td>
             </tr>
             {% endfor %}
+            <p class="card-text">Средний рейтинг: {{object.rating}}</p>
             <form action="/add-comment/" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form.as_p}}
