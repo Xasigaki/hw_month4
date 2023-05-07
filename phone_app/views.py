@@ -102,7 +102,7 @@ class CreateCommentView(generic.CreateView):
     template_name = 'phone_detail.html'
     form_class = forms.CommentForm
     queryset = models.Reviews.objects.all()
-    success_url = '/'
+    success_url = '/phone_list/'
 
     def form_valid(self, form):
         print(form.cleaned_data)
